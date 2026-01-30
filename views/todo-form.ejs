@@ -119,7 +119,9 @@
         font-weight: 700;
         font-size: 1rem;
         cursor: pointer;
-        transition: transform 0.1s ease, box-shadow 0.1s ease;
+        transition:
+          transform 0.1s ease,
+          box-shadow 0.1s ease;
       }
 
       .submit-btn:hover {
@@ -137,11 +139,21 @@
   </head>
 
   <body>
-    <form class="todo-card" action="/todo" method="POST">
-      <div class="title">Plan Your Focus ✨</div>
-      <div class="subtitle">
-        Small tasks done daily create massive momentum.
-      </div>
+    <form
+      class="todo-card"
+      method="POST"
+      action="<%= isEdit ? `/todos/${todo._id}?_method=PATCH` : '/todo' %>"
+    >
+      <div class="title">
+  <%= isEdit ? "Refine Your Task ✏️" : "Plan Your Focus ✨" %>
+</div>
+
+<div class="subtitle">
+  <%= isEdit
+    ? "Small improvements compound into big wins."
+    : "Small tasks done daily create massive momentum." %>
+</div>
+
 
       <div class="form-group">
         <label for="task">Task</label>
@@ -150,6 +162,7 @@
           id="task"
           name="task"
           placeholder="What do you want to accomplish?"
+          value="<%= todo?.task || '' %>"
           required
         />
       </div>
@@ -158,25 +171,40 @@
         <div style="flex: 1">
           <label for="priority">Priority</label>
           <select id="priority" name="priority" required>
-            <option value="" disabled selected>Select priority</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
+  <option value="" disabled <%= !todo ? "selected" : "" %>>
+    Select priority
+  </option>
+
+  <option value="High" <%= todo?.priority === "High" ? "selected" : "" %>>
+    High
+  </option>
+
+  <option value="Medium" <%= todo?.priority === "Medium" ? "selected" : "" %>>
+    Medium
+  </option>
+
+  <option value="Low" <%= todo?.priority === "Low" ? "selected" : "" %>>
+    Low
+  </option>
+</select>
+
         </div>
 
         <div style="flex: 1">
           <label for="dueDate">Due Date</label>
-          <input type="date" id="dueDate" name="dueDate" />
+          <input
+  type="date"
+  id="dueDate"
+  name="dueDate"
+  value="<%= todo?.dueDate ? todo.dueDate.toISOString().split('T')[0] : '' %>"
+/>
         </div>
       </div>
 
-      <div class="checkbox-group">
-        <input type="checkbox" id="important" name="important" />
-        <span>This task matters deeply</span>
-      </div>
+      <button type="submit" class="submit-btn">
+  <%= isEdit ? "Update Task ✨" : "Add Task 🚀" %>
+</button>
 
-      <button type="submit" class="submit-btn">Add Task 🚀</button>
 
       <div class="motivation">Discipline today = freedom tomorrow.</div>
     </form>

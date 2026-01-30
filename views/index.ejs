@@ -97,15 +97,6 @@
         background: var(--low);
       }
 
-      .important {
-        border: 1px solid #22c55e;
-        color: #22c55e;
-        padding: 4px 8px;
-        border-radius: 8px;
-        font-size: 0.7rem;
-        margin-left: 6px;
-      }
-
       .empty {
         text-align: center;
         margin-top: 60px;
@@ -122,6 +113,41 @@
         border-radius: 10px;
         font-weight: 700;
       }
+      .delete-btn {
+  background: #020617;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #fe0202;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: transparent;
+  border: none;
+  color: white;
+  transform: scale(1.2);
+}
+.edit-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.edit-btn:hover {
+  /* background: #38bdf8; */
+  background: #020617;
+  transform: scale(1.1);
+}
+
+
+
     </style>
   </head>
 
@@ -144,9 +170,7 @@
 
           <div>
             <div class="task">
-              <%= todo.task %> <% if (todo.important) { %>
-              <span class="important">IMPORTANT</span>
-              <% } %>
+              <%= todo.task %>
             </div>
 
             <% const dueDate = todo.dueDate ? new
@@ -159,9 +183,14 @@
         <span class="badge <%= (todo.priority || 'low').toLowerCase() %>">
           <%= todo.priority || 'Low' %>
         </span>
+        <button class="delete-btn" data-id="<%= todo._id %>">❌</button>
+        <!-- <button class="edit-btn" data-id="<%= todo._id %>">✏️</button> -->
+         <a href="/todos/<%= todo._id %>/edit" class="edit-btn"  data-id="<%= todo._id %>">✏️</a>
       </div>
       <% }) %>
-      <script src="../public/js/todos.js"></script>
+      <script src="/js/todos.js"></script>
+      <script src="/js/delete.js"></script>
+      <!-- <script src="/js/update.js"></script> -->
     </div>
   </body>
 </html>

@@ -1,0 +1,118 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login • Todoist</title>
+
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 420px;
+        padding: 2rem;
+      }
+
+      .card {
+        background: #020617;
+        border-radius: 14px;
+        padding: 2.2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-bottom: 1.6rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        border: 1px solid #1e293b;
+        background: #020617;
+        color: #e5e7eb;
+        font-size: 0.95rem;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #16a34a;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: none;
+        background: #22c55e;
+        color: #020617;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #16a34a;
+      }
+
+      .footer {
+        margin-top: 1.2rem;
+        text-align: center;
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+
+      .footer a {
+        color: #22c55e;
+        text-decoration: none;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Welcome back</h1>
+        <p>Log in and continue your streak.</p>
+
+        <form id="loginForm">
+          <input type="email" id="email" placeholder="Email" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        <p id="error" class="error"></p>
+        <div class="footer">
+          Don’t have an account?
+          <a href="/auth/sign-up">Create one</a>
+        </div>
+      </div>
+    </div>
+    <script src="/js/signIn.js"></script>
+  </body>
+</html>

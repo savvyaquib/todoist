@@ -14,18 +14,14 @@ const todoSchema = new mongoose.Schema({
     required: [true, "Priority is requied"],
     enum: ["High", "Medium", "Low"],
   },
-  important: {
-    type: Boolean,
-    default: false,
-  },
   dueDate: {
-    type: String,
+    type: Date,
     default: null,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    // required: true,
     index: true,
   }
 });

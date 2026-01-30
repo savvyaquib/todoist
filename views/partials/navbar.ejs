@@ -1,0 +1,310 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 11 12 14 22 4"></polyline>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+      </svg>
+      <span class="brand-name">Todoist</span>
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+      <% if (user) { %>
+        <!-- Authenticated User -->
+        <div class="user-profile">
+          <div class="user-avatar">
+            <span><%= user.name.charAt(0).toUpperCase() %></span>
+          </div>
+          <span class="username"><%= user.name %></span>
+          <div class="dropdown-menu">
+            <a href="/profile" class="dropdown-item">Profile</a>
+            <a href="/settings" class="dropdown-item">Settings</a>
+            <hr class="dropdown-divider">
+            <!-- <a href="/logout" id="logout" class="dropdown-item">Logout</a> -->
+             <!-- <button class="dropdown-item" id="logout-btn" style="background-color: transparent; border: none; cursor: pointer;">Logout</button> -->
+              <a href="#" id="logout" class="dropdown-item">Logout</a>
+          </div>
+        </div>
+      <% } else { %>
+        <!-- Guest User -->
+        <div class="nav-links">
+          <a href="/auth/sign-in" class="nav-link">Sign In</a>
+          <a href="/auth/sign-up" class="nav-link btn-signup">Sign Up</a>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0e27;
+    color: #fff;
+  }
+
+  .navbar {
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    color: #4a9eff;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+  }
+
+  .nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-signup {
+    background: #4a9eff;
+    color: #fff;
+  }
+
+  .btn-signup:hover {
+    background: #3a8eef;
+  }
+
+  .user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+  }
+
+  .user-profile:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .username {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: rgba(20, 25, 50, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .user-profile:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .dropdown-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-toggle span {
+    width: 25px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .nav-container {
+      padding: 0 1rem;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 73px;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 39, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem 1rem;
+    }
+
+    .user-profile {
+      justify-content: center;
+      padding: 0.75rem 1rem;
+    }
+
+    .dropdown-menu {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brand-name {
+      font-size: 1.25rem;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .username {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+<script src="/js/signOut.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        this.classList.toggle('active');
+      });
+    }
+  });
+</script>

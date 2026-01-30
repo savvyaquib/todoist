@@ -1,0 +1,295 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <!-- Brand Section -->
+      <div class="footer-section footer-brand-section">
+        <div class="footer-brand">
+          <svg class="footer-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          <span>Todoist</span>
+        </div>
+        <p class="footer-description">
+          Conquer your day, one task at a time. Stay organized, build habits, and unlock your productivity potential.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product Links -->
+      <div class="footer-section">
+        <h4 class="footer-heading">Product</h4>
+        <ul class="footer-links">
+          <li><a href="/features">Features</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/templates">Templates</a></li>
+          <li><a href="/integrations">Integrations</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources Links -->
+      <div class="footer-section">
+        <h4 class="footer-heading">Resources</h4>
+        <ul class="footer-links">
+          <li><a href="/help">Help Center</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/guides">Guides</a></li>
+          <li><a href="/community">Community</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Links -->
+      <div class="footer-section">
+        <h4 class="footer-heading">Company</h4>
+        <ul class="footer-links">
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/press">Press Kit</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="copyright">
+          &copy; <%= new Date().getFullYear() %> Todoist. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="/privacy">Privacy Policy</a>
+          <span class="separator">•</span>
+          <a href="/terms">Terms of Service</a>
+          <span class="separator">•</span>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: rgba(5, 8, 20, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem 0 2rem;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand-section {
+    max-width: 350px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand-icon {
+    width: 32px;
+    height: 32px;
+    color: #4a9eff;
+  }
+
+  .footer-description {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+  }
+
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .social-link:hover {
+    background: #4a9eff;
+    color: #fff;
+    transform: translateY(-3px);
+  }
+
+  .footer-heading {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: #4a9eff;
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .footer-legal a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-legal a:hover {
+    color: #4a9eff;
+  }
+
+  .separator {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  @media (max-width: 992px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .footer-brand-section {
+      grid-column: 1 / -1;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-container {
+      padding: 0 1.5rem;
+    }
+
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-bottom-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .footer-legal {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .separator {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: 2rem 0 1rem;
+    }
+
+    .footer-container {
+      padding: 0 1rem;
+    }
+
+    .footer-brand {
+      font-size: 1.25rem;
+    }
+
+    .footer-brand-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .footer-description {
+      font-size: 0.9rem;
+    }
+  }
+</style>

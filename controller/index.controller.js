@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 let now = dayjs().format("YYYY-MM-DD");
 
 export const getTodos = async (req, res) => {
-  const todos = await Todo.find().sort({ createdAt: -1 });
+  const todos = await Todo.find({ user: req.user._id }).sort({ createdAt: -1 });
 
   const formattedTodos = todos.map((todo) => ({
     ...todo.toObject(),
@@ -13,29 +13,28 @@ export const getTodos = async (req, res) => {
       : "No deadline",
   }));
 
-  // const { completed } = req.body;
-  // console.log(completed);
-
-  // console.log(req.body.id)
   res.render("index", { todos: formattedTodos || [] });
-  // res.render("index", { todos });
 };
 
 export const createTodo = async (req, res) => {
-  const { task, completed, important, priority, dueDate } = req.body;
-  console.log(task, completed, important, priority, dueDate);
+  const { task, completed, priority, dueDate } = req.body;
+  // console.log(task, completed, priority, dueDate);
+  const user = await req.user._id;
+  console.log(user);
   const newTodo = await Todo.create({
     task: task,
     completed: completed,
     priority: priority,
-    important: important === "on",
+    // important: important === "on",
     dueDate: dueDate || now,
+    user: user,
   });
-  res.json({
-    success: true,
-    message: "You got it",
-    data: newTodo,
-  });
+  // res.json({
+  //   success: true,
+  //   message: "You got it",
+  //   data: newTodo,
+  // });
+  res.redirect("/todos")
 };
 
 export const toggleTodo = async (req, res, next) => {
@@ -43,10 +42,10 @@ export const toggleTodo = async (req, res, next) => {
     await Todo.findOneAndUpdate(
       {
         _id: req.params.id,
-        user: req.session.userId
+        user: req.session.userId,
       },
       {
-        completed: req.body.completed
+        completed: req.body.completed,
       }
     );
 
@@ -56,7 +55,66 @@ export const toggleTodo = async (req, res, next) => {
   }
 };
 
-// export const updateTodo = async (req, res) => {
-//   const { completed } = req.body;
-//   console.log(completed)
-// };
+export const deleteTodo = async (req, res) => {
+  const todo = await Todo.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user._id, // 🔥 ownership check
+  });
+
+  if (!todo) {
+    return res.status(404).json({ message: "Todo not found" });
+  }
+
+  res.status(200).json({ success: true });
+};
+
+export const updateTodo = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { task, priority, dueDate } = req.body;
+
+    const todo = await Todo.findOneAndUpdate(
+      { _id: id, user: req.user._id }, // 🔐 ownership
+      {
+        task,
+        priority,
+        dueDate: dueDate || now,
+      },
+      { new: true }
+    );
+
+    if (!todo) {
+      return res.status(404).send("Todo not found");
+    }
+
+    res.redirect("/todos");
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const getEditTodo = async (req, res) => {
+  const todo = await Todo.findOne({
+    _id: req.params.id,
+    user: req.user._id
+  });
+
+  if (!todo) {
+    return res.status(404).send("Todo not found");
+  }
+
+  res.render("todo-form", {
+    todo,
+    isEdit: true
+  });
+};
+
+
+export const homePage = (req, res) => {
+  console.log("homepage", req.user)
+  res.render("home", {
+    user: req.user || null,
+  });
+};
+
