@@ -10,7 +10,6 @@ export const signUp = async (req, res, next) => {
 
   try {
     const { name, email, password } = req.body;
-    console.log("REQ BODY: ", req.body);
 
     // check if a user already exists
     const existingUser = await User.findOne({ email });
@@ -35,7 +34,10 @@ export const signUp = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
+      // secure: true,
       sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+      path: "/",
     });
 
     // await session.commitTransaction();
@@ -60,7 +62,6 @@ export const signIn = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    console.log("from signin controller", req.user)
     if (!user) {
       const error = new Error("User not found");
       error.statusCode = 404;
@@ -81,7 +82,10 @@ export const signIn = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
+      // secure: true,
       sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+      path: "/",
     });
 
     res.status(200).json({
@@ -92,7 +96,6 @@ export const signIn = async (req, res, next) => {
         user,
       },
     });
-    // res.redirect("/")
   } catch (error) {
     next(error);
   }
@@ -103,7 +106,7 @@ export const signOut = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     sameSite: "strict",
-    secure: false, // true in production (HTTPS)
+    secure: false,
   });
 
   res.status(200).json({
@@ -112,9 +115,3 @@ export const signOut = (req, res) => {
   });
 };
 
-// export const homePage = (req, res) => {
-//   // req.user = decodedUser;
-//   res.render("home", {
-//     user: req.user || null,
-//   });
-// };

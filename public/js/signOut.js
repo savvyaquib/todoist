@@ -3,7 +3,7 @@ document.getElementById("logout").addEventListener("click", async (e) => {
 
   await fetch("/auth/sign-out", {
     method: "POST",
-    credentials: "include", // IMPORTANT for cookies
+    credentials: "include",
   });
 
   window.location.href = "/auth/sign-in";

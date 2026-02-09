@@ -17,7 +17,7 @@ document.addEventListener("click", async (e) => {
     }
 
     // Remove card from UI
-    e.target.closest(".todo-card").remove();
+    e.target.closest(".todos-card").remove();
   } catch (err) {
     console.error(err);
   }

@@ -8,7 +8,6 @@ export const authorizeApi = async (req, res, next) => {
     console.log("authHeader", authHeader)
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      // return res.status(401).json({ message: "Not authorized" });
       return res.render("signIn")  
     }
 

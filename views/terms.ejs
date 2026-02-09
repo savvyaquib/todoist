@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terms of Service • Todoist</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+  <%- include('partials/navbar', { user }) %>
+
+  <section class="features-section">
+    <div class="features-container">
+      <h1 class="section-title">Terms of Service</h1>
+      <p class="section-subtitle">Simple rules. Clear expectations.</p>
+
+      <div class="feature-card">
+        <p class="feature-description">
+          By using this application, you agree to use it responsibly and lawfully.
+        </p>
+
+        <p class="feature-description">
+          This project is provided “as-is” without warranties.
+          We are not responsible for lost data or downtime.
+        </p>
+
+        <p class="feature-description">
+          Abuse, automated attacks, or attempts to break the system
+          may result in access termination.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

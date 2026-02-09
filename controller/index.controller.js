@@ -13,14 +13,12 @@ export const getTodos = async (req, res) => {
       : "No deadline",
   }));
 
-  res.render("index", { todos: formattedTodos || [] });
+  res.render("todos", { todos: formattedTodos || [], user: req.user || null });
 };
 
 export const createTodo = async (req, res) => {
   const { task, completed, priority, dueDate } = req.body;
-  // console.log(task, completed, priority, dueDate);
   const user = await req.user._id;
-  console.log(user);
   const newTodo = await Todo.create({
     task: task,
     completed: completed,
@@ -106,13 +104,13 @@ export const getEditTodo = async (req, res) => {
 
   res.render("todo-form", {
     todo,
-    isEdit: true
+    isEdit: true,
+    user: req.user || null,
   });
 };
 
 
 export const homePage = (req, res) => {
-  console.log("homepage", req.user)
   res.render("home", {
     user: req.user || null,
   });

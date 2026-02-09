@@ -6,14 +6,11 @@ export const authorize = async (req, res, next) => {
   try {
     const token = req.cookies.token;
 
-    console.log("token from cookie:", token);
-
     if (!token) {
       return res.render("signIn");
     }
 
     const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("decoded:", decoded);
 
     const user = await User.findById(decoded.userId).select("-password");
 
@@ -22,10 +19,29 @@ export const authorize = async (req, res, next) => {
     }
 
     req.user = user;
-    // console.log(" user:::::::", user)
     next();
   } catch (error) {
-    console.error("Auth error:", error);
     return res.render("signIn");
   }
 }
+
+export const softAuth = async (req, res, next) => {
+  // this auth is for logged-in as well as logged-out users
+  try {
+    const token = req.cookies?.token;
+
+    if (!token) {
+      req.user = null;
+      return next();
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("-password");
+
+    req.user = user || null;
+    next();
+  } catch (err) {
+    req.user = null;
+    next();
+  }
+};

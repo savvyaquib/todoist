@@ -1,9 +1,7 @@
 import express from "express"
-import Todo from "./models/todo.model.js"
 import connectToDatabase from "./config/db.js"
 import dotenv from "dotenv";
 import indexRouter from "./routes/index.routes.js";
-import { createTodo } from "./controller/index.controller.js";
 import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import methodOverride from "method-override";

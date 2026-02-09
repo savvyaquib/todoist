@@ -24,7 +24,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    // ✅ SAVE TOKEN
+    // save token
     localStorage.setItem("token", data.data.token);
 
     // redirect
