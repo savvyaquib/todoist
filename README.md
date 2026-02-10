@@ -76,8 +76,7 @@ This approach is optimized for **server-rendered websites**, not just APIs.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/todoist.git
-cd todoist
+git clone https://github.com/savvyaquib/todoist.git
 ````
 
 ### 2. Install dependencies
